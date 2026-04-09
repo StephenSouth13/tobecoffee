@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Leaf, Coffee, Wind, Snowflake, Filter, Zap } from "lucide-react";
 import Layout from "@/components/Layout";
 import heroImg from "@/assets/hero-coffee-field.jpg";
 import aboutImg from "@/assets/about-pourover.jpg";
@@ -7,14 +6,14 @@ import statsBg from "@/assets/stats-bg.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import catDripBag from "@/assets/cat-drip-bag.jpg";
+import catRoasted from "@/assets/cat-roasted.jpg";
+import catMenu from "@/assets/cat-menu.jpg";
 
-const categories = [
-  { icon: Leaf, title: "Cà phê nhân xanh", desc: "Green coffee beans" },
-  { icon: Coffee, title: "Cà phê hạt rang", desc: "Roasted coffee beans" },
-  { icon: Wind, title: "Cà phê bột", desc: "Ground coffee" },
-  { icon: Snowflake, title: "Cà phê ủ lạnh", desc: "Cold brew coffee" },
-  { icon: Filter, title: "Cà phê túi lọc", desc: "Drip-bag coffee" },
-  { icon: Zap, title: "Cà phê hoà tan", desc: "Instant coffee" },
+const productCategories = [
+  { img: catDripBag, label: "CUNG ỨNG", title: "Cà Phê Nhân cho\nNhà Rang Xay" },
+  { img: catRoasted, label: "CUNG CẤP", title: "Cà Phê Rang cho\nQuán, Chuỗi F&B" },
+  { img: catMenu, label: "SETUP & HUẤN LUYỆN", title: "Menu Thức Uống\nvà Vận Hành Quầy" },
 ];
 
 const stats = [
