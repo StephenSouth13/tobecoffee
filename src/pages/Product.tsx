@@ -102,9 +102,8 @@ const Product = () => {
                       <p className="font-body text-xs text-muted-foreground uppercase tracking-wider mb-1">{p.category}</p>
                       <h3 className="font-heading text-base font-bold mb-1 leading-snug">{p.name}</h3>
                       <p className="font-body text-xs text-muted-foreground mb-3 line-clamp-2">{p.desc}</p>
-                      <p className="font-body text-lg font-semibold text-primary mb-4">{formatPrice(p.price)}</p>
                       <Button className="w-full rounded-sm font-body uppercase tracking-wider text-xs">
-                        Mua ngay
+                        Xem chi tiết
                       </Button>
                     </div>
                   </div>
