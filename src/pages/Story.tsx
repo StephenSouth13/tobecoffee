@@ -1,6 +1,8 @@
 import Layout from "@/components/Layout";
 import storyImg from "@/assets/story-sourcing.jpg";
-import statsBg from "@/assets/stats-bg.jpg";
+import serviceGreen from "@/assets/service-green-beans.jpg";
+import serviceRoasting from "@/assets/service-roasting.jpg";
+import serviceConsulting from "@/assets/service-consulting.jpg";
 
 const missions = [
   {
@@ -24,19 +26,25 @@ const stats = [
   { number: "90%+", label: "Tỷ lệ quả chín đạt chuẩn sản xuất sang xay nguyên chất" },
   { number: "600+", label: "Nông hộ liên kết trồng & sản xuất nhân xanh chất lượng cao" },
   { number: "2000+", label: "Tấn nguyên liệu chất lượng cao khai thác nguồn cung cả mùa vụ" },
-  { number: "150+", label: "Tấn cà phê rang xay cung ứng cho khách hàng mới năm" },
+  { number: "150+", label: "Tấn cà phê rang xay cung ứng cho khách hàng mỗi năm" },
 ];
 
 const services = [
   {
+    img: serviceGreen,
+    label: "Cung ứng",
     title: "Cung Ứng Cà Phê Nhân Xanh",
     desc: "Nguồn nguyên liệu tốt sẽ tạo nên sản phẩm chất lượng. TOBE cam kết nguồn cung cà phê nhân xanh chất lượng cao suốt niên vụ cho các nhà rang xay và doanh nghiệp sản xuất thương mại.",
   },
   {
+    img: serviceRoasting,
+    label: "Cung cấp",
     title: "Cung Cấp Cà Phê Rang Xay",
     desc: "Đồ uống ngon là phần tử quyết định tạo nên sự thành công của một thương hiệu. Vì vậy, ưu tiên hàng đầu của TOBE là hạt cà phê phải tươi mới và hợp vị khi giao đến khách hàng.",
   },
   {
+    img: serviceConsulting,
+    label: "Tư vấn giải pháp",
     title: "Tư Vấn Giải Pháp Kinh Doanh Cà Phê",
     desc: "TOBE đồng hành cùng đối tác và khách hàng trong các giải pháp về đầu tư chi phí, quản lý chất lượng và phát triển kinh doanh, tối ưu nhu cầu sử dụng sản phẩm tại địa điểm kinh doanh.",
   },
@@ -82,7 +90,7 @@ const Story = () => (
       </div>
     </section>
 
-    {/* Split section - Image + text */}
+    {/* Split section - Image + stats */}
     <section className="py-20">
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="overflow-hidden rounded-sm">
@@ -114,7 +122,7 @@ const Story = () => (
       </div>
     </section>
 
-    {/* Dịch Vụ */}
+    {/* Dịch Vụ - with real images */}
     <section className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">Dịch Vụ</h2>
@@ -122,14 +130,21 @@ const Story = () => (
           Với mỗi sản phẩm cà phê gửi đến quý đối tác — khách hàng, đội ngũ TOBE gửi vào đó sự tỉ mỉ và tận tâm để đem đến trải nghiệm dịch vụ tốt nhất.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((s, i) => (
+          {services.map((s) => (
             <div key={s.title} className="bg-card border border-border rounded-sm overflow-hidden group">
-              <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                <span className="font-heading text-5xl text-primary/20">0{i + 1}</span>
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width={800}
+                  height={600}
+                />
               </div>
               <div className="p-6">
                 <p className="font-body text-[10px] uppercase tracking-widest text-primary font-semibold mb-2">
-                  {i === 0 ? "Cung ứng" : i === 1 ? "Cung cấp" : "Tư vấn giải pháp"}
+                  {s.label}
                 </p>
                 <h3 className="font-heading text-lg font-bold mb-3">{s.title}</h3>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">{s.desc}</p>
