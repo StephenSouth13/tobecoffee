@@ -9,11 +9,26 @@ import blog3 from "@/assets/blog-3.jpg";
 import catDripBag from "@/assets/cat-drip-bag.jpg";
 import catRoasted from "@/assets/cat-roasted.jpg";
 import catMenu from "@/assets/cat-menu.jpg";
+import productPulseBold from "@/assets/product-pulse-bold.jpg";
+import productPauseDrip from "@/assets/product-pause-drip.jpg";
+import productBrewBold from "@/assets/product-brew-bold.jpg";
+import productDripBag from "@/assets/product-drip-bag.jpg";
+import productPauseBox from "@/assets/product-pause-box.jpg";
+import productCore from "@/assets/product-core.jpg";
 
 const productCategories = [
   { img: catDripBag, label: "CUNG ỨNG", title: "Cà Phê Nhân cho\nNhà Rang Xay" },
   { img: catRoasted, label: "CUNG CẤP", title: "Cà Phê Rang cho\nQuán, Chuỗi F&B" },
   { img: catMenu, label: "SETUP & HUẤN LUYỆN", title: "Menu Thức Uống\nvà Vận Hành Quầy" },
+];
+
+const featuredProducts = [
+  { img: productPulseBold, name: "Tobe Pulse Bold", desc: "Signature Blend", price: "189.000₫" },
+  { img: productPauseDrip, name: "Tobe Pause Drip Bag", desc: "Thảnh thơi từng phút giây", price: "120.000₫" },
+  { img: productBrewBold, name: "Tobe Brew Bold 500g", desc: "100% Coffee Viet Nam", price: "210.000₫" },
+  { img: productDripBag, name: "Tobe Drip Bag", desc: "Drip Bag tiện lợi", price: "95.000₫" },
+  { img: productPauseBox, name: "Tobe Pause Hộp Quà", desc: "Brew Bold Be TOBE", price: "250.000₫" },
+  { img: productCore, name: "Tobe Core", desc: "Cà phê hạt rang 250g", price: "195.000₫" },
 ];
 
 const stats = [
@@ -122,6 +137,47 @@ const Index = () => (
               </div>
             </Link>
           ))}
+        </div>
+      </div>
+    </section>
+
+    {/* SẢN PHẨM NỔI BẬT */}
+    <section className="py-20 bg-secondary/30">
+      <div className="container mx-auto px-4">
+        <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-wider">
+          Sản phẩm nổi bật
+        </h2>
+        <p className="font-body text-muted-foreground text-center mb-12">Brew Bold. Be TOBE. — 100% Coffee Viet Nam</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map((p) => (
+            <Link
+              key={p.name}
+              to="/product"
+              className="bg-card border border-border rounded-sm overflow-hidden group hover:shadow-xl transition-shadow"
+            >
+              <div className="aspect-square overflow-hidden bg-secondary">
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5 text-center">
+                <h3 className="font-heading text-base font-bold mb-1">{p.name}</h3>
+                <p className="font-body text-xs text-muted-foreground mb-2">{p.desc}</p>
+                <p className="font-body text-lg font-semibold text-primary">{p.price}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link
+            to="/product"
+            className="inline-block bg-primary text-primary-foreground font-body font-semibold px-8 py-3 rounded-sm uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors"
+          >
+            Xem tất cả sản phẩm
+          </Link>
         </div>
       </div>
     </section>
