@@ -23,9 +23,9 @@ const productCategories = [
 ];
 
 const stats = [
-  { number: "600+", label: "Nông hộ liên kết sản xuất, kinh doanh và trồng trọn bền vững" },
-  { number: "2000+", label: "Trang xay nguyên nhất được sản xuất mỗi ngày" },
-  { number: "450+", label: "Bộ bao chuỗi cửa hàng nhượng quyền sản và dịch vụ thương" },
+  { number: "600+", label: "Nông hộ liên kết sản xuất, kinh doanh và trồng trọt bền vững" },
+  { number: "2000+", label: "Tấn nguyên liệu chất lượng cao được sản xuất mỗi năm" },
+  { number: "150+", label: "Tấn cà phê rang xay cung ứng cho khách hàng mỗi năm" },
 ];
 
 const blogPosts = [
@@ -81,10 +81,10 @@ const Index = () => (
             Coffee Is In Our Blood!
           </h2>
           <p className="font-body text-muted-foreground leading-relaxed mb-5">
-            Chúng tôi tìm đến xung quanh cà phê, sẽn đổi suối hoa hai mặt bà. Bạn có thể và công chúng tôi tôi được nguồn gốc trong rất Tây Nguyên quả hương, nước rừng đời là Nối Trong không Bạn, và không có phần quan trọng nhất là Việt Nam.
+            Tại TOBE chúng tôi tập trung mọi nguồn lực và đam mê để hướng đến chế biến sâu cà phê Việt Nam. Mang đến thị trường sản phẩm cà phê hảo hạng — tiện lợi và ngon thuần khiết.
           </p>
           <p className="font-body text-muted-foreground leading-relaxed mb-8">
-            Tại TOBE chúng tôi tập trung mọi nguồn lực và đam mê để hướng đến chế biến sâu cà phê Việt Nam. Mang đến thị trường sản phẩm cà phê hảo hạng — tiện lợi và ngon thuần khiết.
+            Từ vùng nguyên liệu Lâm Đồng, TOBE liên kết với hơn 600 hộ nông dân để đảm bảo nguồn cà phê chất lượng cao nhất, mang hương vị Việt Nam ra thế giới.
           </p>
           <Link
             to="/story"
@@ -184,22 +184,6 @@ const Index = () => (
             </article>
           ))}
         </div>
-      </div>
-    </section>
-
-    {/* CTA */}
-    <section className="py-20 bg-primary text-primary-foreground text-center">
-      <div className="container mx-auto px-4">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Câu chuyện TOBE</h2>
-        <p className="font-body text-primary-foreground/80 mb-8 max-w-lg mx-auto">
-          Từ những hạt cà phê chín mọng trên cao nguyên đến ly cà phê hoàn hảo trong tay bạn.
-        </p>
-        <Link
-          to="/story"
-          className="inline-block bg-primary-foreground text-foreground font-body font-semibold px-8 py-3 rounded-sm uppercase tracking-wider text-sm hover:bg-primary-foreground/90 transition-colors"
-        >
-          Tìm hiểu thêm
-        </Link>
       </div>
     </section>
   </Layout>
