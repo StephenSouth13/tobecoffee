@@ -9,11 +9,26 @@ import blog3 from "@/assets/blog-3.jpg";
 import catDripBag from "@/assets/cat-drip-bag.jpg";
 import catRoasted from "@/assets/cat-roasted.jpg";
 import catMenu from "@/assets/cat-menu.jpg";
+import productPulseBold from "@/assets/product-pulse-bold.jpg";
+import productPauseDrip from "@/assets/product-pause-drip.jpg";
+import productBrewBold from "@/assets/product-brew-bold.jpg";
+import productDripBag from "@/assets/product-drip-bag.jpg";
+import productPauseBox from "@/assets/product-pause-box.jpg";
+import productCore from "@/assets/product-core.jpg";
 
 const productCategories = [
   { img: catDripBag, label: "CUNG ỨNG", title: "Cà Phê Nhân cho\nNhà Rang Xay" },
   { img: catRoasted, label: "CUNG CẤP", title: "Cà Phê Rang cho\nQuán, Chuỗi F&B" },
   { img: catMenu, label: "SETUP & HUẤN LUYỆN", title: "Menu Thức Uống\nvà Vận Hành Quầy" },
+];
+
+const featuredProducts = [
+  { img: productPulseBold, name: "Tobe Pulse Bold", desc: "Signature Blend", price: "189.000₫" },
+  { img: productPauseDrip, name: "Tobe Pause Drip Bag", desc: "Thảnh thơi từng phút giây", price: "120.000₫" },
+  { img: productBrewBold, name: "Tobe Brew Bold 500g", desc: "100% Coffee Viet Nam", price: "210.000₫" },
+  { img: productDripBag, name: "Tobe Drip Bag", desc: "Drip Bag tiện lợi", price: "95.000₫" },
+  { img: productPauseBox, name: "Tobe Pause Hộp Quà", desc: "Brew Bold Be TOBE", price: "250.000₫" },
+  { img: productCore, name: "Tobe Core", desc: "Cà phê hạt rang 250g", price: "195.000₫" },
 ];
 
 const stats = [
