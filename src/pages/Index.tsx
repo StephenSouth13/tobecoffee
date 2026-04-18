@@ -50,18 +50,24 @@ const Index = () => (
     </section>
 
     {/* About - Split screen */}
-    <section className="py-20">
-      <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div className="overflow-hidden">
-          <img
-            src={aboutImg}
-            alt="Pha cà phê pour-over"
-            className="w-full h-[400px] lg:h-[500px] object-cover"
-            loading="lazy"
-            width={960}
-            height={1080}
-          />
-        </div>
+    <section className="relative h-[70vh] sm:h-[80vh] lg:h-[90vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <img
+    src={heroImg}
+    alt="Cánh đồng cà phê Việt Nam"
+    className="
+      absolute inset-0 w-full h-full 
+      object-cover 
+      object-[center_30%] sm:object-center
+      scale-110 sm:scale-100
+    "
+    width={1920}
+    height={1080}
+    loading="eager"
+  />
+
+  
+   
         <div>
           <p className="font-body text-sm font-semibold text-primary uppercase tracking-widest mb-3">Về chúng tôi</p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
