@@ -227,7 +227,7 @@ const ContactAdmin = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {formFields.map((field) => (
+                    {formFields.map((field, index) => (
                       <TableRow key={field.id}>
                         <TableCell className="font-medium">{field.field_name}</TableCell>
                         <TableCell className="text-sm text-gray-600">{field.field_type}</TableCell>
