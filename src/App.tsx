@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import Story from "./pages/Story";
 import Product from "./pages/Product";
@@ -32,12 +33,12 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/homepage" element={<HomepageAdmin />} />
-          <Route path="/admin/about" element={<AboutAdmin />} />
-          <Route path="/admin/products" element={<ProductsAdmin />} />
-          <Route path="/admin/blog" element={<BlogAdmin />} />
-          <Route path="/admin/contact" element={<ContactAdmin />} />
+          <Route path="/admin" element={<ProtectedAdminRoute><Dashboard /></ProtectedAdminRoute>} />
+          <Route path="/admin/homepage" element={<ProtectedAdminRoute><HomepageAdmin /></ProtectedAdminRoute>} />
+          <Route path="/admin/about" element={<ProtectedAdminRoute><AboutAdmin /></ProtectedAdminRoute>} />
+          <Route path="/admin/products" element={<ProtectedAdminRoute><ProductsAdmin /></ProtectedAdminRoute>} />
+          <Route path="/admin/blog" element={<ProtectedAdminRoute><BlogAdmin /></ProtectedAdminRoute>} />
+          <Route path="/admin/contact" element={<ProtectedAdminRoute><ContactAdmin /></ProtectedAdminRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
