@@ -1,63 +1,57 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY environment variables.");
+}
 
-export type Tables = {
-  homepage: {
-    id: string;
-    cover_image: string | null;
-    hero_title: string;
-    hero_subtitle: string;
-    sections: any;
-    created_at: string;
-    updated_at: string;
-  };
-  about_page: {
-    id: string;
-    title: string;
-    content: string;
-    sections: any;
-    created_at: string;
-    updated_at: string;
-  };
-  products: {
-    id: string;
-    name: string;
-    description: string;
-    content: string;
-    images: string[];
-    videos: string[];
-    order_index: number;
-    created_at: string;
-    updated_at: string;
-  };
-  blog_posts: {
-    id: string;
-    title: string;
-    slug: string;
-    content: string;
-    images: string[];
-    videos: string[];
-    order_index: number;
-    created_at: string;
-    updated_at: string;
-  };
-  contact_form_fields: {
-    id: string;
-    field_name: string;
-    field_type: string;
-    is_required: boolean;
-    order_index: number;
-    created_at: string;
-    updated_at: string;
-  };
-  contact_messages: {
-    id: string;
-    form_data: any;
-    ip_address: string | null;
-    created_at: string;
-  };
-};
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    storage: typeof window === "undefined" ? undefined : window.localStorage,
+  },
+});
+/**
+ * Lấy dữ liệu CMS của một trang cụ thể (Bọc try-catch an toàn)
+ */
+export async function getPageContent<T>(pageName: string, fallback: T): Promise<T> {
+  try {
+    const { data, error } = await supabase
+      .from("page_contents")
+      .select("content")
+      .eq("page", pageName)
+      .single();
+
+    if (error || !data) {
+      console.warn(`[Supabase] Không tìm thấy trang ${pageName}, sử dụng dữ liệu mặc định.`);
+      return fallback;
+    }
+    return data.content as T;
+  } catch (err) {
+    console.error(`[Supabase Error] Lỗi fetch trang ${pageName}:`, err);
+    return fallback;
+  }
+}
+
+/**
+ * Cập nhật dữ liệu cấu trúc JSONB từ Admin lên Supabase
+ */
+export async function updatePageContent(pageName: string, content: any): Promise<boolean> {
+  try {
+    const { error } = await supabase
+      .from("page_contents")
+      .update({ content, updated_at: new Date().toISOString() })
+      .eq("page", pageName);
+
+    if (error) {
+      console.error(`[Supabase Error] Không thể update dữ liệu trang ${pageName}:`, error.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error(`[Supabase Error] Lỗi hệ thống khi lưu trang ${pageName}:`, err);
+    return false;
+  }
+}

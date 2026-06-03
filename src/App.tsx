@@ -7,8 +7,11 @@ import { ProtectedAdminRoute } from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import Story from "./pages/Story";
 import Product from "./pages/Product";
+import ProductDetail from "./pages/ProductDetail";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/admin/Dashboard";
 import HomepageAdmin from "./pages/admin/HomepageAdmin";
@@ -30,7 +33,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/story" element={<Story />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<ProtectedAdminRoute><Dashboard /></ProtectedAdminRoute>} />
