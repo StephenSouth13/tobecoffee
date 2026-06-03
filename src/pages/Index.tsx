@@ -37,30 +37,31 @@ const blogPosts = [
 const Index = () => (
   <Layout>
     {/* Hero */}
-    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Cánh đồng cà phê Việt Nam"
-        className="absolute inset-0 w-full h-full object-cover"
-        width={1920}
-        height={1080}
-      />
-      <div className="absolute inset-0 bg-foreground/50" />
-      <div className="relative z-10 text-center px-4">
-        <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground tracking-tight mb-6 animate-fade-in">
-          BREW BOLD. BE TOBE.
-        </h1>
-        <p className="font-body text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-8">
-          Hương vị cà phê đậm đà từ cao nguyên Việt Nam
-        </p>
-        <Link
-          to="/product"
-          className="inline-block bg-primary text-primary-foreground font-body font-semibold px-8 py-3 rounded-sm uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors"
-        >
-          Khám phá sản phẩm
-        </Link>
-      </div>
-    </section>
+    <section className="relative h-[70vh] sm:h-[80vh] lg:h-[90vh] flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <img
+    src={heroImg}
+    alt="Cánh đồng cà phê Việt Nam"
+    className="
+      absolute inset-0 w-full h-full 
+      object-cover 
+      object-[center_30%] sm:object-center
+      scale-110 sm:scale-100
+    "
+    width={1920}
+    height={1080}
+    loading="eager"
+  />
+
+  {/* Overlay gradient cho dễ đọc */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+  {/* Content */}
+  <div className="relative z-10 text-center px-4 max-w-3xl">
+    
+    
+  </div>
+</section>
 
     {/* About - Split screen */}
     <section className="py-20">
