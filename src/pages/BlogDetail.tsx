@@ -20,6 +20,11 @@ const BlogDetail = () => {
     fetchBlog();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [postId]);
+
+
   const post = useMemo(
     () => blogContent.posts.find((item) => item.id === postId) ?? null,
     [blogContent.posts, postId]
