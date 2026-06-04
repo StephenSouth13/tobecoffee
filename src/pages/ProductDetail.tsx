@@ -20,6 +20,11 @@ const ProductDetail = () => {
     });
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [productId]);
+
+
   const products = content.products || [];
   const product = useMemo(() => products.find((p) => p.id === productId) || null, [productId, products]);
   const related = useMemo(
