@@ -54,7 +54,7 @@ const Admin = () => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    if (!session) return;
+    if (!session || !isAdmin) return;
     (async () => {
       const [h, s, p, b, c] = await Promise.all([
         getPageContent<IndexContent>("index", defaultIndexContent),
@@ -70,12 +70,12 @@ const Admin = () => {
       setContact(c);
       const { data } = await supabase
         .from("contact_messages")
-        .select("id, form_data, created_at")
+        .select("id, form_data, created_at, is_read")
         .order("created_at", { ascending: false });
       setMessages((data as unknown as Message[]) || []);
       setLoading(false);
     })();
-  }, [session]);
+  }, [session, isAdmin]);
 
   if (authLoading) {
     return (
@@ -85,6 +85,40 @@ const Admin = () => {
     );
   }
   if (!session) return <Navigate to="/admin/login" replace />;
+  if (!isAdmin) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-4 text-center">
+        <h1 className="font-heading text-2xl font-bold">Không có quyền truy cập</h1>
+        <p className="max-w-md text-muted-foreground">
+          Tài khoản của bạn không phải quản trị viên. Vui lòng đăng nhập bằng tài khoản admin.
+        </p>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={signOut}>Đăng xuất</Button>
+          <Button asChild><Link to="/">Về trang chủ</Link></Button>
+        </div>
+      </div>
+    );
+  }
+
+  const unreadCount = messages.filter((m) => !m.is_read).length;
+
+  const markRead = async (id: string, value: boolean) => {
+    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, is_read: value } : m)));
+    const { error } = await supabase.from("contact_messages").update({ is_read: value }).eq("id", id);
+    if (error) toast.error("Cập nhật thất bại");
+  };
+
+  const deleteMessage = async (id: string) => {
+    const prev = messages;
+    setMessages((cur) => cur.filter((m) => m.id !== id));
+    const { error } = await supabase.from("contact_messages").delete().eq("id", id);
+    if (error) {
+      setMessages(prev);
+      toast.error("Xoá thất bại");
+    } else {
+      toast.success("Đã xoá tin nhắn");
+    }
+  };
 
   const save = async (page: TabId) => {
     const map: Record<string, unknown> = { home: home, story, product, blog, contact };
@@ -94,6 +128,7 @@ const Admin = () => {
     setSaving(false);
     ok ? toast.success("Đã lưu thay đổi") : toast.error("Lưu thất bại");
   };
+
 
   const SaveBar = ({ page }: { page: TabId }) => (
     <div className="sticky bottom-4 z-10 flex justify-end">
