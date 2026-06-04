@@ -83,6 +83,15 @@ const ProductDetail = () => {
             <h1 className="font-heading text-3xl md:text-4xl font-bold mb-4">{product.name}</h1>
             <p className="font-body text-lg text-muted-foreground mb-6">{product.desc}</p>
 
+            <div className="flex flex-wrap gap-2 mb-6">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium">
+                <Leaf className="h-3.5 w-3.5 text-primary" /> {product.category}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium">
+                <Award className="h-3.5 w-3.5 text-primary" /> Xuất xứ {product.origin}
+              </span>
+            </div>
+
             <div className="space-y-4 border-t border-border pt-6 mb-8">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Danh mục</span>
@@ -94,9 +103,24 @@ const ProductDetail = () => {
               </div>
             </div>
 
+            <div className="grid grid-cols-3 gap-3 border-t border-border pt-6 mb-8">
+              {[
+                { icon: Leaf, label: "Rang mộc nguyên chất" },
+                { icon: Award, label: "Chất lượng tuyển chọn" },
+                { icon: Truck, label: "Giao hàng toàn quốc" },
+              ].map((f) => (
+                <div key={f.label} className="flex flex-col items-center gap-2 text-center">
+                  <div className="rounded-full bg-primary/10 p-2.5 text-primary">
+                    <f.icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs text-muted-foreground leading-tight">{f.label}</span>
+                </div>
+              ))}
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-3">
               <Button size="lg" className="flex-1" asChild>
-                <a href="tel:0909806947">Liên hệ đặt hàng</a>
+                <a href="tel:0909806947"><Phone className="mr-2 h-4 w-4" /> Liên hệ đặt hàng</a>
               </Button>
               <Button size="lg" variant="secondary" className="flex-1" asChild>
                 <Link to="/product">Quay lại</Link>
