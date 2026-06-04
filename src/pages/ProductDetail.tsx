@@ -4,6 +4,8 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { getPageContent } from "@/lib/supabase";
 import { defaultProductPageContent, ProductPageContent } from "@/lib/content";
+import { Leaf, Award, Truck, Phone } from "lucide-react";
+
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
