@@ -186,6 +186,46 @@ const Admin = () => {
           </div>
         ) : (
           <div className="mx-auto max-w-3xl space-y-8">
+            {/* DASHBOARD */}
+            {tab === "dashboard" && (
+              <>
+                <div>
+                  <h2 className="font-heading text-2xl font-bold">Xin chào 👋</h2>
+                  <p className="text-sm text-muted-foreground">{session.user.email}</p>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {[
+                    { icon: Package, label: "Sản phẩm", value: product.products.length, tab: "product" as TabId },
+                    { icon: FileText, label: "Bài viết", value: blog.posts.length, tab: "blog" as TabId },
+                    { icon: MessageSquare, label: "Tin nhắn", value: messages.length, tab: "messages" as TabId },
+                    { icon: Mail, label: "Tin chưa đọc", value: unreadCount, tab: "messages" as TabId },
+                  ].map((s) => (
+                    <button key={s.label} onClick={() => setTab(s.tab)} className="text-left">
+                      <Card className="flex items-center gap-4 p-6 transition-shadow hover:shadow-md">
+                        <div className="rounded-xl bg-primary/10 p-3 text-primary">
+                          <s.icon className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <p className="font-heading text-2xl font-bold">{s.value}</p>
+                          <p className="text-sm text-muted-foreground">{s.label}</p>
+                        </div>
+                      </Card>
+                    </button>
+                  ))}
+                </div>
+                <Card className="space-y-3 p-6">
+                  <h3 className="font-heading text-lg font-bold">Truy cập nhanh</h3>
+                  <div className="grid gap-2 sm:grid-cols-3">
+                    {tabs.filter((t) => t.id !== "dashboard").map((t) => (
+                      <Button key={t.id} variant="outline" className="justify-start" onClick={() => setTab(t.id)}>
+                        {t.label}
+                      </Button>
+                    ))}
+                  </div>
+                </Card>
+              </>
+            )}
+
             {/* HOME */}
             {tab === "home" && (
               <>
