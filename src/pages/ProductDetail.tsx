@@ -2,14 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import { RichContent } from "@/components/RichContent";
 import { getPageContent } from "@/lib/supabase";
-import { defaultProductPageContent, ProductPageContent } from "@/lib/content";
+import { defaultProductPageContent, ProductPageContent, findBySlugOrId, itemPath } from "@/lib/content";
 import { Leaf, Award, Truck, Phone } from "lucide-react";
 
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const productId = Number(id ?? "");
   const [content, setContent] = useState<ProductPageContent>(defaultProductPageContent);
   const [loading, setLoading] = useState(true);
 
@@ -22,14 +22,14 @@ const ProductDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [productId]);
+  }, [id]);
 
 
   const products = content.products || [];
-  const product = useMemo(() => products.find((p) => p.id === productId) || null, [productId, products]);
+  const product = useMemo(() => findBySlugOrId(products, id), [id, products]);
   const related = useMemo(
-    () => products.filter((p) => p.id !== productId && (!product || p.category === product.category)).slice(0, 3),
-    [products, productId, product]
+    () => products.filter((p) => p.id !== product?.id && (!product || p.category === product.category)).slice(0, 3),
+    [products, product]
   );
 
   if (loading) {
@@ -134,7 +134,7 @@ const ProductDetail = () => {
         <section className="py-12 bg-secondary/40">
           <div className="container mx-auto px-4 max-w-3xl">
             <h2 className="font-heading text-2xl font-bold mb-4">Mô tả chi tiết</h2>
-            <p className="font-body text-base leading-relaxed text-muted-foreground whitespace-pre-line">{product.details}</p>
+            <RichContent html={product.details} className="prose-lg" />
           </div>
         </section>
       )}
@@ -145,7 +145,7 @@ const ProductDetail = () => {
             <h2 className="font-heading text-2xl font-bold mb-8 text-center">Sản phẩm liên quan</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {related.map((p) => (
-                <Link key={p.id} to={`/product/${p.id}`} className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
+                <Link key={p.id} to={`/product/${itemPath(p)}`} className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square bg-secondary overflow-hidden">
                     {p.imgUrl && (
                       <img src={p.imgUrl} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />

@@ -2,14 +2,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Trash2, Plus, Copy, ChevronUp, ChevronDown, Search } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Trash2, Plus, Copy, ChevronUp, ChevronDown, Search, Wand2 } from "lucide-react";
 import { AdminField, AdminArea, AdminImage } from "./AdminFields";
+import { RichTextEditor } from "./RichTextEditor";
+import { slugify } from "@/lib/content";
 
 export type FieldDef = {
   key: string;
   label: string;
-  kind: "text" | "area" | "image" | "number";
+  kind: "text" | "area" | "image" | "number" | "rich" | "slug";
   folder?: string;
+  /** Cho kind "slug": key nguồn để tự tạo slug (vd: "name" hoặc "title") */
+  from?: string;
 };
 
 interface ListEditorProps<T> {
@@ -106,7 +111,7 @@ export function ListEditor<T extends Record<string, unknown>>({
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {fields.map((f) => {
-                  const span = f.kind === "area" || f.kind === "image" ? "sm:col-span-2" : "";
+                  const span = f.kind === "area" || f.kind === "image" || f.kind === "rich" || f.kind === "slug" ? "sm:col-span-2" : "";
                   return (
                     <div key={f.key} className={span}>
                       {f.kind === "text" && (
@@ -131,10 +136,47 @@ export function ListEditor<T extends Record<string, unknown>>({
                           onChange={(v) => update(index, f.key, v)}
                         />
                       )}
+                      {f.kind === "rich" && (
+                        <RichTextEditor
+                          label={f.label}
+                          folder={f.folder ?? "content"}
+                          value={item[f.key] as string}
+                          onChange={(v) => update(index, f.key, v)}
+                        />
+                      )}
+                      {f.kind === "slug" && (
+                        <div className="space-y-1.5">
+                          <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                            {f.label}
+                          </Label>
+                          <div className="flex items-center gap-2">
+                            <span className="select-none text-sm text-muted-foreground">/</span>
+                            <Input
+                              value={(item[f.key] as string) ?? ""}
+                              placeholder="duong-dan-than-thien"
+                              onChange={(e) => update(index, f.key, slugify(e.target.value))}
+                            />
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="shrink-0"
+                              onClick={() => update(index, f.key, slugify(String(item[f.from ?? "title"] ?? "")))}
+                              title="Tạo tự động từ tiêu đề"
+                            >
+                              <Wand2 className="mr-1.5 h-3.5 w-3.5" /> Tạo
+                            </Button>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            Để trống sẽ dùng số ID. Đường dẫn nên ngắn gọn, không dấu.
+                          </p>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
+
             </Card>
           );
         })}

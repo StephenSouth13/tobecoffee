@@ -280,6 +280,7 @@ const Admin = () => {
                     onChange={(blogPosts) => setHome({ ...home, blogPosts: blogPosts as unknown as IndexContent["blogPosts"] })}
                     newItem={(items) => ({
                       id: Math.max(0, ...items.map((i) => Number(i.id) || 0)) + 1,
+                      slug: "",
                       title: "Bài viết mới",
                       excerpt: "",
                       date: new Date().toISOString().slice(0, 10),
@@ -289,10 +290,11 @@ const Admin = () => {
                     })}
                     fields={[
                       { key: "title", label: "Tiêu đề", kind: "text" },
+                      { key: "slug", label: "Đường dẫn (slug)", kind: "slug", from: "title" },
                       { key: "topic", label: "Chủ đề", kind: "text" },
                       { key: "date", label: "Ngày (YYYY-MM-DD)", kind: "text" },
                       { key: "excerpt", label: "Tóm tắt", kind: "area" },
-                      { key: "body", label: "Nội dung", kind: "area" },
+                      { key: "body", label: "Nội dung", kind: "rich", folder: "blog" },
                       { key: "imgUrl", label: "Ảnh", kind: "image", folder: "blog" },
                     ]}
                   />
@@ -374,6 +376,7 @@ const Admin = () => {
                     onChange={(products) => setProduct({ ...product, products: products as unknown as ProductPageContent["products"] })}
                     newItem={(items) => ({
                       id: Math.max(0, ...items.map((i) => Number(i.id) || 0)) + 1,
+                      slug: "",
                       name: "Sản phẩm mới",
                       desc: "",
                       details: "",
@@ -384,11 +387,12 @@ const Admin = () => {
                     })}
                     fields={[
                       { key: "name", label: "Tên sản phẩm", kind: "text" },
+                      { key: "slug", label: "Đường dẫn (slug)", kind: "slug", from: "name" },
                       { key: "category", label: "Danh mục", kind: "text" },
                       { key: "origin", label: "Xuất xứ", kind: "text" },
                       { key: "price", label: "Giá (VNĐ)", kind: "number" },
                       { key: "desc", label: "Mô tả ngắn", kind: "area" },
-                      { key: "details", label: "Mô tả chi tiết", kind: "area" },
+                      { key: "details", label: "Mô tả chi tiết", kind: "rich", folder: "products" },
                       { key: "imgUrl", label: "Ảnh", kind: "image", folder: "products" },
                     ]}
                   />
@@ -414,6 +418,7 @@ const Admin = () => {
                     onChange={(posts) => setBlog({ ...blog, posts: posts as unknown as BlogContent["posts"] })}
                     newItem={(items) => ({
                       id: Math.max(0, ...items.map((i) => Number(i.id) || 0)) + 1,
+                      slug: "",
                       title: "Bài viết mới",
                       excerpt: "",
                       date: new Date().toISOString().slice(0, 10),
@@ -423,10 +428,11 @@ const Admin = () => {
                     })}
                     fields={[
                       { key: "title", label: "Tiêu đề", kind: "text" },
+                      { key: "slug", label: "Đường dẫn (slug)", kind: "slug", from: "title" },
                       { key: "topic", label: "Chủ đề", kind: "text" },
                       { key: "date", label: "Ngày (YYYY-MM-DD)", kind: "text" },
                       { key: "excerpt", label: "Tóm tắt", kind: "area" },
-                      { key: "body", label: "Nội dung", kind: "area" },
+                      { key: "body", label: "Nội dung", kind: "rich", folder: "blog" },
                       { key: "imgUrl", label: "Ảnh", kind: "image", folder: "blog" },
                     ]}
                   />
