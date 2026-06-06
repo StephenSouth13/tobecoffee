@@ -97,6 +97,17 @@ export function RichTextEditor({ label, value, onChange, folder = "content", pla
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
   });
 
+  // Đồng bộ khi nội dung thay đổi từ bên ngoài (sắp xếp/nhân bản item)
+  useEffect(() => {
+    if (!editor) return;
+    const current = editor.getHTML();
+    if ((value || "") !== current && !editor.isFocused) {
+      editor.commands.setContent(value || "", { emitUpdate: false });
+    }
+  }, [value, editor]);
+
+
+
   const setLink = useCallback(() => {
     if (!editor) return;
     const prev = editor.getAttributes("link").href as string | undefined;
