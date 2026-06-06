@@ -93,7 +93,7 @@ const Product = () => {
                       <h3 className="font-heading text-base font-bold mb-1 leading-snug">{p.name}</h3>
                       <p className="font-body text-xs text-muted-foreground mb-4 line-clamp-2">{p.desc}</p>
                       <Button asChild className="w-full rounded-sm font-body uppercase tracking-wider text-xs">
-                        <Link to={`/product/${p.id}`}>Xem chi tiết</Link>
+                        <Link to={`/product/${itemPath(p)}`}>Xem chi tiết</Link>
                       </Button>
                     </div>
                   </div>
