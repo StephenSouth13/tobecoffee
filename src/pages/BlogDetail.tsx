@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import { RichContent } from "@/components/RichContent";
 import { getPageContent } from "@/lib/supabase";
-import { BlogContent, defaultBlogContent } from "@/lib/content";
+import { BlogContent, defaultBlogContent, findBySlugOrId, itemPath } from "@/lib/content";
 
 const BlogDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const postId = Number(id ?? "");
   const [blogContent, setBlogContent] = useState<BlogContent>(defaultBlogContent);
   const [loading, setLoading] = useState(true);
 
@@ -22,12 +22,12 @@ const BlogDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [postId]);
+  }, [id]);
 
 
   const post = useMemo(
-    () => blogContent.posts.find((item) => item.id === postId) ?? null,
-    [blogContent.posts, postId]
+    () => findBySlugOrId(blogContent.posts, id),
+    [blogContent.posts, id]
   );
 
   const sortedPosts = useMemo(
@@ -36,8 +36,8 @@ const BlogDetail = () => {
   );
 
   const recommendations = useMemo(
-    () => sortedPosts.filter((item) => item.id !== postId).slice(0, 3),
-    [sortedPosts, postId]
+    () => sortedPosts.filter((item) => item.id !== post?.id).slice(0, 3),
+    [sortedPosts, post]
   );
 
   if (loading) {
