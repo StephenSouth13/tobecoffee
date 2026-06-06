@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { getPageContent } from "@/lib/supabase";
-import { allCategories, defaultProductPageContent, origins, ProductItem, ProductPageContent } from "@/lib/content";
+import { allCategories, defaultProductPageContent, origins, ProductItem, ProductPageContent, itemPath } from "@/lib/content";
 
 const Product = () => {
   const [content, setContent] = useState<ProductPageContent>(defaultProductPageContent);
