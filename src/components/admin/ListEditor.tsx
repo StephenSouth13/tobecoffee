@@ -2,14 +2,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Trash2, Plus, Copy, ChevronUp, ChevronDown, Search } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Trash2, Plus, Copy, ChevronUp, ChevronDown, Search, Wand2 } from "lucide-react";
 import { AdminField, AdminArea, AdminImage } from "./AdminFields";
+import { RichTextEditor } from "./RichTextEditor";
+import { slugify } from "@/lib/content";
 
 export type FieldDef = {
   key: string;
   label: string;
-  kind: "text" | "area" | "image" | "number";
+  kind: "text" | "area" | "image" | "number" | "rich" | "slug";
   folder?: string;
+  /** Cho kind "slug": key nguồn để tự tạo slug (vd: "name" hoặc "title") */
+  from?: string;
 };
 
 interface ListEditorProps<T> {
