@@ -145,7 +145,7 @@ const ProductDetail = () => {
             <h2 className="font-heading text-2xl font-bold mb-8 text-center">Sản phẩm liên quan</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {related.map((p) => (
-                <Link key={p.id} to={`/product/${p.id}`} className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
+                <Link key={p.id} to={`/product/${itemPath(p)}`} className="group bg-card border border-border rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square bg-secondary overflow-hidden">
                     {p.imgUrl && (
                       <img src={p.imgUrl} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
