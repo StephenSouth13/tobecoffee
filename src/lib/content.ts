@@ -197,8 +197,8 @@ export const defaultStoryContent: StoryContent = {
 
 export const defaultProductPageContent: ProductPageContent = {
   hero: {
-    title: "Sản phẩm",
-    subtitle: "Đa dạng lựa chọn cho mọi gu thưởng thức",
+    title: " ",
+    subtitle: " ",
     imageUrl: "",
   },
   products: [
