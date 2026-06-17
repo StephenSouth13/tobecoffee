@@ -115,15 +115,15 @@ const Contact = () => {
           {/* Right - Map */}
           <div className="rounded-sm overflow-hidden border border-border min-h-[400px]">
             <iframe
-              title="TOBE Coffee Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.8!2d107.8112!3d11.5479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3173f7a!2sKCN+B%27Lao!5e0!3m2!1svi!2svn!4v1700000000000"
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: "500px" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+  title="B'Lao"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125096.40989196904!2d107.67887321099633!3d11.532995680503024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3173f7eb6431cb4d%3A0x77401a85c2d4756d!2zQidMYW8sIEzDom0gxJDhu5NuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1781685885947!5m2!1svi!2s"
+  width="100%"
+  height="500"
+  style={{ border: 0 }}
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+/>
           </div>
         </div>
       </section>
