@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { getPageContent } from "@/lib/supabase";
-import { BlogContent, defaultBlogContent } from "@/lib/content";
+import { BlogContent, defaultBlogContent, itemPath } from "@/lib/content";
 
 const Blog = () => {
   const [blogContent, setBlogContent] = useState<BlogContent>(defaultBlogContent);
@@ -66,7 +66,7 @@ const Blog = () => {
                         </div>
                         <h3 className="font-heading text-xl font-semibold mb-3 leading-snug">{post.title}</h3>
                         <p className="text-sm text-muted-foreground mb-5 line-clamp-3">{post.excerpt}</p>
-                        <Link to={`/blog/${post.id}`} className="inline-flex items-center text-sm font-semibold text-primary hover:underline">
+                        <Link to={`/blog/${itemPath(post)}`} className="inline-flex items-center text-sm font-semibold text-primary hover:underline">
                           Xem chi tiết →
                         </Link>
                       </div>
@@ -84,7 +84,7 @@ const Blog = () => {
                 </div>
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-sm space-y-4">
                   {sortedPosts.slice(0, 3).map((post) => (
-                    <Link key={post.id} to={`/blog/${post.id}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition">
+                    <Link key={post.id} to={`/blog/${itemPath(post)}`} className="block rounded-3xl border border-border bg-background p-4 hover:border-primary hover:bg-primary/5 transition">
                       <p className="text-xs uppercase tracking-[0.24em] text-primary/80 mb-2">{post.topic}</p>
                       <h3 className="font-semibold text-lg leading-snug">{post.title}</h3>
                       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{post.excerpt}</p>
