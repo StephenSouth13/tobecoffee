@@ -58,17 +58,18 @@ const Admin = () => {
     if (!session || !isAdmin) return;
     (async () => {
       const [h, s, p, b, c] = await Promise.all([
-        getPageContent<IndexContent>("index", defaultIndexContent),
-        getPageContent<StoryContent>("story", defaultStoryContent),
-        getPageContent<ProductPageContent>("product", defaultProductPageContent),
-        getPageContent<BlogContent>("blog", defaultBlogContent),
-        getPageContent<ContactContent>("contact", defaultContactContent),
-      ]);
-      setHome(h);
-      setStory(s);
-      setProduct(p);
-      setBlog(b);
-      setContact(c);
+  getPageContent<IndexContent>("index"),
+  getPageContent<StoryContent>("story"),
+  getPageContent<ProductPageContent>("product"),
+  getPageContent<BlogContent>("blog"),
+  getPageContent<ContactContent>("contact"),
+]);
+
+setHome(h ?? defaultIndexContent);
+setStory(s ?? defaultStoryContent);
+setProduct(p ?? defaultProductPageContent);
+setBlog(b ?? defaultBlogContent);
+setContact(c ?? defaultContactContent);
       const { data } = await supabase
         .from("contact_messages")
         .select("id, form_data, created_at, is_read")

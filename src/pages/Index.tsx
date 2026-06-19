@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 
-import { IndexContent, slugify } from "@/lib/content";
+import { IndexContent, slugify, itemPath } from "@/lib/content";
 import { getPageContent } from "@/lib/supabase";
 
 const Index = () => {
@@ -113,7 +113,7 @@ const Index = () => {
                 to="/story"
                 className="inline-flex bg-primary text-primary-foreground px-8 py-4 font-semibold"
               >
-               
+                Xem thêm
               </Link>
             </div>
           </div>
@@ -191,48 +191,51 @@ const Index = () => {
           </div>
         </section>
       )}
-
       {/* BLOG */}
-      {home.blogPosts.length > 0 && (
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <h2 className="font-heading text-3xl font-bold text-center mb-12">
-              {home.blogTitle || "Tin tức"}
-            </h2>
+{home.blogPosts.length > 0 && (
+  <section className="py-20">
+    <div className="container mx-auto px-4">
+      <h2 className="font-heading text-3xl font-bold text-center mb-12">
+        {home.blogTitle || "Tin tức"}
+      </h2>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {home.blogPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="border border-border bg-card overflow-hidden"
-                >
-                  {post.imgUrl && (
-                    <img
-                      src={post.imgUrl}
-                      alt={post.title}
-                      className="w-full h-56 object-cover"
-                    />
-                  )}
+      <div className="grid md:grid-cols-3 gap-8">
+        {home.blogPosts.map((post) => (
+          <Link
+            key={post.id}
+            to={`/blog/${itemPath(post)}`}
+            className="block"
+          >
+            <article className="border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow">
+              {post.imgUrl && (
+                <img
+                  src={post.imgUrl}
+                  alt={post.title}
+                  className="w-full h-56 object-cover"
+                />
+              )}
 
-                  <div className="p-6">
-                    <p className="text-xs uppercase text-primary mb-2">
-                      {post.topic}
-                    </p>
+              <div className="p-6">
+                <p className="text-xs uppercase text-primary mb-2">
+                  {post.topic}
+                </p>
 
-                    <h3 className="font-bold mb-3">
-                      {post.title}
-                    </h3>
+                <h3 className="font-bold mb-3">
+                  {post.title}
+                </h3>
 
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+                <p className="text-sm text-muted-foreground line-clamp-3">
+                  {post.excerpt}
+                </p>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+      
     </Layout>
   );
 };
