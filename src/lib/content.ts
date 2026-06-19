@@ -304,29 +304,35 @@ export const slugify = (input: string): string =>
     .replace(/^-+|-+$/g, "");
 
 export const itemPath = (
-  item: ProductItem
+  item: ProductItem | BlogPost
 ): string => {
   if (item.slug?.trim()) {
     return item.slug;
   }
 
-  return slugify(item.name);
+  if ("name" in item) {
+    return slugify(item.name);
+  }
+
+  return slugify(item.title);
 };
 
-export function findBySlugOrId(
-  items: ProductItem[],
+export function findBySlugOrId<T extends ProductItem | BlogPost>(
+  items: T[],
   param?: string
-): ProductItem | undefined {
+): T | undefined {
   if (!param) return undefined;
 
   return items.find((item) => {
-    return (
-      String(item.id) === param ||
-      item.slug === param ||
-      slugify(item.name) === param
-    );
+    const isIdMatch = String(item.id) === param;
+    const isSlugMatch = item.slug === param;
+    
+    // Kiểm tra xem item là ProductItem (có name) hay BlogPost (có title)
+    const nameOrTitle = "name" in item ? item.name : item.title;
+    const isGeneratedSlugMatch = slugify(nameOrTitle) === param;
+
+    return isIdMatch || isSlugMatch || isGeneratedSlugMatch;
   });
 }
-
 
 
