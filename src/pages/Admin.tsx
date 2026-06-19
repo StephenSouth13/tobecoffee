@@ -128,7 +128,13 @@ setContact(c ?? defaultContactContent);
     setSaving(true);
     const ok = await updatePageContent(pageKey, map[page]);
     setSaving(false);
-    ok ? toast.success("Đã lưu thay đổi") : toast.error("Lưu thất bại");
+    
+    // ✅ ĐÃ SỬA: Dùng if-else thay cho toán tử ba ngôi
+    if (ok) {
+      toast.success("Đã lưu thay đổi");
+    } else {
+      toast.error("Lưu thất bại");
+    }
   };
 
 

@@ -67,26 +67,18 @@ const Product = () => {
   const products: ProductItem[] =
     content.products || [];
 
-  const showOrigin =
-    content.showOrigin === true;
+  const showOrigin = content.showOrigin === true;
 
-  const filtered = useMemo(
-    () =>
-      products.filter(
-        (p) =>
-          (cat === "Tất cả" ||
-            p.category === cat) &&
-          (!showOrigin ||
-            origin === "Tất cả" ||
-            p.origin === origin)
-      ),
-    [
-      cat,
-      origin,
-      products,
-      showOrigin,
-    ]
-  );
+  const filtered = useMemo(() => {
+    // Đưa việc khởi tạo vào trong để tránh tạo mảng [] mới ở mỗi lần render
+    const products: ProductItem[] = content.products || [];
+
+    return products.filter(
+      (p) =>
+        (cat === "Tất cả" || p.category === cat) &&
+        (!showOrigin || origin === "Tất cả" || p.origin === origin)
+    );
+  }, [cat, origin, content.products, showOrigin]); // Đổi dependency thành content.products
 
   const handleCategoryClick = (
     categoryName: string
