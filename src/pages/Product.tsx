@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { getPageContent } from "@/lib/supabase";
 import { allCategories, defaultProductPageContent, origins, ProductItem, ProductPageContent, itemPath } from "@/lib/content";
 
 const Product = () => {
+  const [searchParams] = useSearchParams();
   const [content, setContent] = useState<ProductPageContent>(defaultProductPageContent);
-  const [cat, setCat] = useState("Tất cả");
-  const [origin, setOrigin] = useState("Tất cả");
+  const [cat, setCat] = useState(() => {
+  return searchParams.get("category") || "Tất cả";
+});
 
   useEffect(() => {
     getPageContent<ProductPageContent>("product", defaultProductPageContent).then(setContent);

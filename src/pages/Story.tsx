@@ -128,7 +128,7 @@ const Story = () => {
                   <h3 className="font-heading text-lg font-bold mb-3">{s.title}</h3>
                   <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">{s.desc}</p>
                   <span className="font-body text-sm text-primary font-semibold cursor-pointer hover:underline">
-                    ▶ Xem thêm
+                    
                   </span>
                 </div>
               </div>

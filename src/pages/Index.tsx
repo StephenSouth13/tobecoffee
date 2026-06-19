@@ -123,7 +123,7 @@ const Index = () => {
 
               <Link
                 key={cat.title}
-                to="/product"
+                to={`/product?category=${encodeURIComponent(cat.label)}`}
                 className="group relative overflow-hidden aspect-[4/3]"
               >
 
